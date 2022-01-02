@@ -1,7 +1,12 @@
+import React from 'react';
+import Header from './Components/Layout/Header';
+import LoginForm from './Components/LoginForm/LoginForm';
+
 function App() {
   return (
     <div>
-      <h1>Test</h1>
+      <Header />
+      <LoginForm />
     </div>
   );
 }

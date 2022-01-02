@@ -1,0 +1,70 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.loginCard {
+  width: 90%;
+  margin: 5rem auto;
+  padding: 3rem 0;
+
+  @include responsiveMin($tablet) {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+  }
+}
+
+.form-header {
+  font-size: 2rem;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  text-align: center;
+  color: $dark-blue-100;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  & .formControl {
+    // background-color: red;
+    display: flex;
+    flex-direction: column;
+    // margin: 0 auto;
+    text-align: left;
+    padding: 1rem 2rem;
+
+    &:nth-child(2) {
+      margin-bottom: 2rem;
+    }
+
+    label {
+      color: $dark-grey-100;
+      font-size: 1.5rem;
+      font-weight: bolder;
+    }
+    input {
+      padding: 0.5rem 0;
+      border-radius: 5px;
+      border: 2px solid $light-blue-100;
+    }
+  }
+
+  & .formButtons {
+    text-align: center;
+
+    & .buttonRegister {
+      color: $white;
+      font-weight: bolder;
+      margin-right: 1rem;
+      background-color: $dark-blue-100;
+    }
+
+    & .buttonLogin {
+      background-color: $white;
+      font-weight: bolder;
+      border: 1px solid $light-blue-100;
+      color: $dark-blue-100;
+    }
+  }
+}
