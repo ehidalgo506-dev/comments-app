@@ -1,12 +1,6 @@
 {
   "registeredUsers": [{ "username": "jdavis", "password": 12345 }],
-  "currentUser": {
-    "image": {
-      "png": "./images/avatars/image-juliusomo.png",
-      "webp": "./images/avatars/image-juliusomo.webp"
-    },
-    "username": "juliusomo"
-  },
+  "currentUser": {},
   "comments": [
     {
       "id": 1,

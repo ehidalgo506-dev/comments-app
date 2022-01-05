@@ -18,12 +18,21 @@
   }
   h1 {
     font-size: 2rem;
+    @include responsiveMax($phone) {
+      display: none;
+    }
   }
 
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 22rem;
+    @include responsiveMax($phone) {
+      width: 100%;
+    }
+
+    p {
+      padding-right: 1.5rem;
+    }
   }
 }

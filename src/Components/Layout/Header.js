@@ -5,10 +5,8 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Button from '../UI/Button';
 
 const Header = (props) => {
-  const { onUsername } = props;
-  console.log(props);
-  console.log(onUsername.currentUser.username);
   const signOutIcon = <FontAwesomeIcon icon={faSignOutAlt} />;
+  const getCurrentUserLocalStorage = localStorage.getItem('currentUser');
 
   const logoutUser = () => {
     localStorage.removeItem('isLogged');
@@ -21,7 +19,7 @@ const Header = (props) => {
       <div>
         <p>
           {props.isLogged
-            ? `Hello! ${onUsername.currentUser.username}`
+            ? `Hello! ${getCurrentUserLocalStorage}`
             : 'Please Log In'}
         </p>
         {props.isLogged && (

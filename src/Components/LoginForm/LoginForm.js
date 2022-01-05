@@ -46,7 +46,8 @@ const LoginForm = (props) => {
 
     if (isFound) {
       localStorage.setItem('isLogged', true);
-      props.onGetUserSubmited(true);
+      localStorage.setItem('currentUser', isFound.username);
+      props.onGetUserSubmited(isFound);
     }
 
     if (!isFound) {
