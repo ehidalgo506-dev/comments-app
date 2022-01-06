@@ -1,0 +1,24 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+.comment {
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  @include responsiveMin($tablet-land) {
+    flex-direction: row;
+
+    .info {
+      order: 2;
+    }
+
+    .score {
+      order: 0;
+    }
+  }
+
+  & > *:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+}

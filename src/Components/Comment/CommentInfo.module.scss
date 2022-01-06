@@ -1,0 +1,39 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.commentInfo {
+  display: flex;
+  flex-direction: column;
+  & > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  & .userInfo {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+
+    & > * {
+      margin-right: 1.3rem;
+    }
+
+    & .userAvatar {
+      width: 3rem;
+    }
+
+    & .userUsername {
+      font-weight: bolder;
+      color: $dark-blue-200;
+      text-transform: lowercase;
+    }
+
+    & .userDate {
+      color: $dark-grey-100;
+    }
+  }
+
+  & .commentText {
+    font-size: 1.3rem;
+    color: $dark-grey-100;
+  }
+}

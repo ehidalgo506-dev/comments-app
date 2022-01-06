@@ -1,0 +1,25 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.replyButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 1.5rem;
+  bottom: 4rem;
+  font-weight: bolder;
+  color: $dark-blue-100;
+  font-size: 1.1rem;
+  transition: all 0.25s ease-in;
+
+  &:hover {
+    transition: all 0.25s ease-in;
+    color: $dark-blue-200;
+  }
+
+  & span {
+    font-size: 1.35rem;
+    padding-left: 0.3rem;
+  }
+}

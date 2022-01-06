@@ -1,5 +1,5 @@
 {
-  "registeredUsers": [{ "username": "jdavis", "password": 12345 }],
+  "registeredUsers": [{ "username": "amyrobson", "password": 12345 }],
   "currentUser": {},
   "comments": [
     {
@@ -9,7 +9,7 @@
       "score": 12,
       "user": {
         "image": {
-          "png": "./images/avatars/image-amyrobson.png",
+          "png": "../../images/avatars/image-amyrobson.png",
           "webp": "./images/avatars/image-amyrobson.webp"
         },
         "username": "amyrobson"

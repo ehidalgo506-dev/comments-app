@@ -1,0 +1,10 @@
+@import '../../sassStyles/mixins';
+
+.main {
+  width: 80%;
+  margin: 2rem auto 0 auto;
+
+  @include responsiveMin($tablet-land) {
+    width: 50%;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Components/Layout/Header';
+import Main from './Components/Layout/Main';
 import LoginForm from './Components/LoginForm/LoginForm';
 import dummyData from './data.json';
 
@@ -23,7 +24,7 @@ function App() {
   }, [isLogged]);
 
   return (
-    <div>
+    <React.Fragment>
       <Header isLogged={isLogged} onLogout={logoutHandler} onUsername={data} />
       {!isLogged && (
         <LoginForm
@@ -32,7 +33,8 @@ function App() {
           onAddNewUser={addNewUserHandler}
         />
       )}
-    </div>
+      {isLogged && <Main data={data} />}
+    </React.Fragment>
   );
 }
 
