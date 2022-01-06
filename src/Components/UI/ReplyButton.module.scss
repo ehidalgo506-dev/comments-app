@@ -13,6 +13,11 @@
   font-size: 1.1rem;
   transition: all 0.25s ease-in;
 
+  @include responsiveMin($tablet-land) {
+    top: 4rem;
+    height: 2rem;
+  }
+
   &:hover {
     transition: all 0.25s ease-in;
     color: $dark-blue-200;

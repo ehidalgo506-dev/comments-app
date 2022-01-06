@@ -10,10 +10,15 @@
   align-items: center;
   border-radius: 5px;
 
+  @include responsiveMin($desktop) {
+    top: 2rem;
+  }
   @include responsiveMin($tablet-land) {
     margin: auto 2rem auto 0;
     flex-direction: column;
     height: 8rem;
+    width: 4rem;
+    top: 2rem;
   }
 
   & button {
