@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
+import dataContext from '../../store/dataContext';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import styles from './LoginForm.module.scss';

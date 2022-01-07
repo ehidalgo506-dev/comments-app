@@ -14,7 +14,7 @@
   transition: all 0.25s ease-in;
 
   @include responsiveMin($tablet-land) {
-    top: 4rem;
+    top: 2rem;
     height: 2rem;
   }
 

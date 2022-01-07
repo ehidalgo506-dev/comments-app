@@ -9,7 +9,7 @@ const ButtonScore = (props) => {
   return (
     <div className={`${styles.buttonScore} ${props.className}`}>
       <button className={styles.buttonPlus}>{plusIcon}</button>
-      <p>12</p>
+      <p>{props.score}</p>
       <button className={styles.buttonMinus}>{minusIcon}</button>
     </div>
   );

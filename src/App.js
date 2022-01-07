@@ -3,6 +3,7 @@ import Header from './Components/Layout/Header';
 import Main from './Components/Layout/Main';
 import LoginForm from './Components/LoginForm/LoginForm';
 import dummyData from './data.json';
+import dataContext from './store/dataContext';
 
 const data = Object.assign({}, dummyData);
 
@@ -24,7 +25,7 @@ function App() {
   }, [isLogged]);
 
   return (
-    <React.Fragment>
+    <dataContext.Provider value={data}>
       <Header isLogged={isLogged} onLogout={logoutHandler} onUsername={data} />
       {!isLogged && (
         <LoginForm
@@ -34,7 +35,7 @@ function App() {
         />
       )}
       {isLogged && <Main data={data} />}
-    </React.Fragment>
+    </dataContext.Provider>
   );
 }
 
