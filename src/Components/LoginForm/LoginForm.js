@@ -9,6 +9,7 @@ const LoginForm = (props) => {
     data: { registeredUsers },
   } = props;
 
+  const mainData = useContext(dataContext);
   const inputUsername = useRef();
   const inputPassword = useRef();
 
@@ -26,8 +27,8 @@ const LoginForm = (props) => {
     }
 
     if (!duplicateUsername) {
-      props.onAddNewUser({ username, password });
       props.onGetUserSubmited(true);
+      mainData.registeredUsers.push({ username: username, password: password });
     }
   };
 
@@ -44,16 +45,15 @@ const LoginForm = (props) => {
     e.preventDefault();
 
     const isFound = checkForExistingUser();
-
-    if (isFound) {
-      localStorage.setItem('isLogged', true);
-      localStorage.setItem('currentUser', isFound.username);
-      props.onGetUserSubmited(isFound);
-    }
-
     if (!isFound) {
       alert('Username or password incorrect');
+      return;
     }
+
+    localStorage.setItem('isLogged', true);
+    localStorage.setItem('currentUser', isFound.username);
+    props.onGetUserSubmited(true);
+    console.log(mainData.currentUser);
   };
 
   return (

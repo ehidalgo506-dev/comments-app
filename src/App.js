@@ -12,10 +12,6 @@ function App() {
 
   const getUserSubmited = (user) => setIsLogged(user);
   const logoutHandler = (logout) => setIsLogged(logout);
-  const addNewUserHandler = (user) => {
-    data.registeredUsers.push(user);
-    data.currentUser = { ...user };
-  };
 
   useEffect(() => {
     const isLogged = localStorage.getItem('isLogged');
@@ -28,11 +24,7 @@ function App() {
     <dataContext.Provider value={data}>
       <Header isLogged={isLogged} onLogout={logoutHandler} onUsername={data} />
       {!isLogged && (
-        <LoginForm
-          data={data}
-          onGetUserSubmited={getUserSubmited}
-          onAddNewUser={addNewUserHandler}
-        />
+        <LoginForm data={data} onGetUserSubmited={getUserSubmited} />
       )}
       {isLogged && <Main data={data} />}
     </dataContext.Provider>

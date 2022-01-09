@@ -7,7 +7,6 @@ import testImage from '../../images/avatars/image-amyrobson.png';
 const CommentInfo = (props) => {
   //all props are undefined except date
   const { commentText, madeBy, date } = props;
-  console.log(props);
 
   return (
     <div className={`${styles.commentInfo} ${props.className}`}>
