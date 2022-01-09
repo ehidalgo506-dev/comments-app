@@ -6,7 +6,7 @@ import { faReply } from '@fortawesome/free-solid-svg-icons';
 const ReplyButton = (props) => {
   const replyIcon = <FontAwesomeIcon icon={faReply} />;
   return (
-    <button className={styles.replyButton}>
+    <button className={styles.replyButton} onClick={props.onClick}>
       {replyIcon} <span>Reply</span>
     </button>
   );

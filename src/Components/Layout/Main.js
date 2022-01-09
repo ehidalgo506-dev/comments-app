@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import dataContext from '../../store/dataContext';
 import Comment from '../Comment/Comment';
 import InputComment from '../Comment/InputComment';
@@ -8,14 +8,18 @@ import styles from './Main.module.scss';
 
 const Main = (props) => {
   const { comments } = useContext(dataContext);
-  console.log(`Checking`);
-  console.log(comments[1].replies.length !== 0);
+
+  const [newUpdate, setNewUpdate] = useState(comments);
+
+  const onNewUpdateHandler = (status) => {
+    setNewUpdate(status);
+  };
 
   return (
     <main className={styles.main}>
-      {comments.map((comment) => {
+      {newUpdate.map((comment) => {
         return (
-          <Fragment>
+          <Fragment key={comment.id}>
             <Card key={comment.id}>
               <Comment
                 id={comment.id}
@@ -26,27 +30,14 @@ const Main = (props) => {
               />
             </Card>
             {comment.replies.length !== 0 && (
-              <RepliesContainer>
-                {comment.replies.map((reply) => {
-                  return (
-                    <Card>
-                      <Comment
-                        content={reply.content}
-                        createdAt={reply.createdAt}
-                        madeBy={reply.user.username}
-                        score={reply.score}
-                      />
-                    </Card>
-                  );
-                })}
-              </RepliesContainer>
+              <RepliesContainer data={comment.replies} />
             )}
           </Fragment>
         );
       })}
 
       <Card>
-        <InputComment />
+        <InputComment onNewUpdate={onNewUpdateHandler} />
       </Card>
     </main>
   );
