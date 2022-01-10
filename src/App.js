@@ -6,7 +6,6 @@ import dummyData from './data.json';
 import dataContext from './store/dataContext';
 
 const data = Object.assign({}, dummyData);
-
 function App() {
   const [isLogged, setIsLogged] = useState(false);
 

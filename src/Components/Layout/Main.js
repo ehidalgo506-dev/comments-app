@@ -1,4 +1,5 @@
-import React, { Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useRef, useState } from 'react';
+import generateCommentTemplate from '../../generateCommentTemplate';
 import dataContext from '../../store/dataContext';
 import Comment from '../Comment/Comment';
 import InputComment from '../Comment/InputComment';
@@ -7,12 +8,21 @@ import Card from '../UI/Card';
 import styles from './Main.module.scss';
 
 const Main = (props) => {
+  const data = useContext(dataContext);
   const { comments } = useContext(dataContext);
-
   const [newUpdate, setNewUpdate] = useState(comments);
+  const newComment = useRef();
 
   const onNewUpdateHandler = (status) => {
     setNewUpdate(status);
+  };
+
+  const postNewComment = (e) => {
+    e.preventDefault();
+
+    comments.push(
+      generateCommentTemplate(newComment.current.value, data.currentUser)
+    );
   };
 
   return (
@@ -37,7 +47,11 @@ const Main = (props) => {
       })}
 
       <Card>
-        <InputComment onNewUpdate={onNewUpdateHandler} />
+        <InputComment
+          onNewUpdate={onNewUpdateHandler}
+          onSubmit={postNewComment}
+          compRef={newComment}
+        />
       </Card>
     </main>
   );
