@@ -10,11 +10,11 @@ import styles from './Main.module.scss';
 const Main = (props) => {
   const data = useContext(dataContext);
   const { comments } = useContext(dataContext);
-  const [newUpdate, setNewUpdate] = useState(comments);
+  const [newUpdate, setNewUpdate] = useState(false);
   const newComment = useRef();
 
   const onNewUpdateHandler = (status) => {
-    setNewUpdate(status);
+    setNewUpdate(!status);
   };
 
   const postNewComment = (e) => {
@@ -23,11 +23,13 @@ const Main = (props) => {
     comments.push(
       generateCommentTemplate(newComment.current.value, data.currentUser)
     );
+
+    setNewUpdate(!newUpdate);
   };
 
   return (
     <main className={styles.main}>
-      {newUpdate.map((comment) => {
+      {comments.map((comment) => {
         return (
           <Fragment key={comment.id}>
             <Card key={comment.id}>
@@ -37,6 +39,7 @@ const Main = (props) => {
                 createdAt={comment.createdAt}
                 madeBy={comment.user.username}
                 score={comment.score}
+                newUpdate={onNewUpdateHandler}
               />
             </Card>
             {comment.replies.length !== 0 && (

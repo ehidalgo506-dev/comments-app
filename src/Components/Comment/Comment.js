@@ -9,10 +9,10 @@ import generateCommentTemplate from '../../generateCommentTemplate';
 
 const Comment = (props) => {
   const data = useContext(dataContext);
-  const { id, madeBy, content, createdAt, score } = props;
   const { comments } = useContext(dataContext);
+  const { id, madeBy, content, createdAt, score, onNewUpdateHandler } = props;
   const [addInputComment, setAddInputComment] = useState([]);
-
+  const [newInput, setNewInput] = useState(false);
   const replyComment = useRef();
 
   const findCommentPerId = () => comments.find((comment) => comment.id === id);
@@ -23,11 +23,13 @@ const Comment = (props) => {
       generateCommentTemplate(replyComment.current.value, data.currentUser)
     );
 
-    console.log(findCommentPerId());
+    // props.onNewUpdateHandler();
+    console.log(dataContext);
   };
 
   //Renders a new InputComment for a reply
   const replyButtonHandler = function () {
+    setNewInput(true);
     setAddInputComment([
       <InputComment
         key={addInputComment.length}
@@ -49,7 +51,7 @@ const Comment = (props) => {
         <ButtonScore score={score} className={styles.score} />
         <ReplyButton onClick={replyButtonHandler} />
       </section>
-      {addInputComment}
+      {newInput && addInputComment}
     </Fragment>
   );
 };
