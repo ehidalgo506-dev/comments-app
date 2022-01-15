@@ -1,15 +1,13 @@
 import React, { useContext, useRef } from 'react';
-import dataContext from '../../store/dataContext';
+import dataContext from '../../store/GlobalState';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
 import styles from './LoginForm.module.scss';
 
 const LoginForm = (props) => {
-  const {
-    data: { registeredUsers },
-  } = props;
-
-  const mainData = useContext(dataContext);
+  const data = useContext(dataContext);
+  const [mainData] = data;
+  const { registeredUsers } = mainData;
   const inputUsername = useRef();
   const inputPassword = useRef();
 

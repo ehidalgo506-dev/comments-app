@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useRef, useState } from 'react';
-import dataContext from '../../store/dataContext';
+import GlobalState from '../../store/GlobalState';
 import ButtonScore from '../UI/ButtonScore';
 import ReplyButton from '../UI/ReplyButton';
 import styles from './Comment.module.scss';
@@ -8,9 +8,11 @@ import InputComment from './InputComment';
 import generateCommentTemplate from '../../generateCommentTemplate';
 
 const Comment = (props) => {
-  const data = useContext(dataContext);
-  const { comments } = useContext(dataContext);
-  const { id, madeBy, content, createdAt, score, onNewUpdateHandler } = props;
+  console.log('🚀 ~ file: Comment.js ~ line 11 ~ Comment ~ props', props);
+  const data = useContext(GlobalState);
+  const [mainData, setMainData] = data;
+  const { comments } = mainData;
+  const { id, madeBy, content, createdAt, score } = props;
   const [addInputComment, setAddInputComment] = useState([]);
   const [newInput, setNewInput] = useState(false);
   const replyComment = useRef();
@@ -23,8 +25,7 @@ const Comment = (props) => {
       generateCommentTemplate(replyComment.current.value, data.currentUser)
     );
 
-    // props.onNewUpdateHandler();
-    console.log(dataContext);
+    setMainData((prevState) => ({ ...prevState }));
   };
 
   //Renders a new InputComment for a reply
