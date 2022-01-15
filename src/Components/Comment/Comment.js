@@ -8,7 +8,6 @@ import InputComment from './InputComment';
 import generateCommentTemplate from '../../generateCommentTemplate';
 
 const Comment = (props) => {
-  console.log('🚀 ~ file: Comment.js ~ line 11 ~ Comment ~ props', props);
   const data = useContext(GlobalState);
   const [mainData, setMainData] = data;
   const { comments } = mainData;
@@ -19,13 +18,17 @@ const Comment = (props) => {
 
   const findCommentPerId = () => comments.find((comment) => comment.id === id);
 
-  const onSubmitHandler = (e) => {
+  const onReplySubmitHandler = (e) => {
     e.preventDefault();
     findCommentPerId().replies.push(
-      generateCommentTemplate(replyComment.current.value, data.currentUser)
+      generateCommentTemplate(
+        replyComment.current.value,
+        mainData.currentUser.currentUser
+      )
     );
 
     setMainData((prevState) => ({ ...prevState }));
+    setNewInput(false);
   };
 
   //Renders a new InputComment for a reply
@@ -34,7 +37,7 @@ const Comment = (props) => {
     setAddInputComment([
       <InputComment
         key={addInputComment.length}
-        onSubmit={onSubmitHandler}
+        onSubmit={onReplySubmitHandler}
         compRef={replyComment}
       />,
     ]);
@@ -45,7 +48,7 @@ const Comment = (props) => {
       <section className={styles.comment}>
         <CommentInfo
           commentText={content}
-          madeBy={madeBy.username}
+          madeBy={madeBy}
           date={createdAt}
           className={styles.info}
         />

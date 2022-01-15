@@ -51,7 +51,6 @@ const LoginForm = (props) => {
     localStorage.setItem('isLogged', true);
     localStorage.setItem('currentUser', isFound.username);
     props.onGetUserSubmited(true);
-    console.log(mainData.currentUser);
   };
 
   return (

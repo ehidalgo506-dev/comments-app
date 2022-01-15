@@ -16,7 +16,10 @@ const Main = (props) => {
   const postNewComment = (e) => {
     e.preventDefault();
     comments.push(
-      generateCommentTemplate(newComment.current.value, data.currentUser)
+      generateCommentTemplate(
+        newComment.current.value,
+        data.currentUser.currentUser
+      )
     );
 
     //Updates the Global State with the new comment added
@@ -44,7 +47,6 @@ const Main = (props) => {
           </Fragment>
         );
       })}
-
       <Card>
         <InputComment onSubmit={postNewComment} compRef={newComment} />
       </Card>

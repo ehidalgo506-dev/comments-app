@@ -3,9 +3,12 @@ import Card from '../UI/Card';
 import Comment from './Comment';
 import ReplyButton from '../UI/ReplyButton';
 import styles from './RepliesContainer.module.scss';
+import { useContext } from 'react/cjs/react.development';
+import GlobalState from '../../store/GlobalState';
 
 const RepliesContainer = (props) => {
   const { data } = props;
+  const [mainData] = useContext(GlobalState);
 
   const replyOnClickHandler = function () {
     console.log(`test`);
