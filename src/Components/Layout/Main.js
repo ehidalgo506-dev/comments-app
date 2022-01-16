@@ -41,9 +41,22 @@ const Main = (props) => {
                 score={comment.score}
               />
             </Card>
-            {comment.replies.length !== 0 && (
-              <RepliesContainer data={comment.replies} />
-            )}
+            {comment.replies.length !== 0 &&
+              comment.replies.map((reply) => {
+                return (
+                  <RepliesContainer key={Math.random()}>
+                    <Card>
+                      <Comment
+                        id={reply.id}
+                        content={reply.content}
+                        createdAt={reply.createdAt}
+                        madeBy={reply.user.username}
+                        score={reply.score}
+                      />
+                    </Card>
+                  </RepliesContainer>
+                );
+              })}
           </Fragment>
         );
       })}
