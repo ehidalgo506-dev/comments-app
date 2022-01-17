@@ -15,7 +15,7 @@ const Main = (props) => {
 
   const postNewComment = (e) => {
     e.preventDefault();
-    comments.push(
+    comments.unshift(
       generateCommentTemplate(
         newComment.current.value,
         data.currentUser.currentUser
@@ -47,11 +47,12 @@ const Main = (props) => {
                   <RepliesContainer key={Math.random()}>
                     <Card>
                       <Comment
-                        id={reply.id}
+                        replyId={reply.id}
                         content={reply.content}
                         createdAt={reply.createdAt}
                         madeBy={reply.user.username}
                         score={reply.score}
+                        isReply={true}
                       />
                     </Card>
                   </RepliesContainer>

@@ -12,6 +12,7 @@ const InputComment = (props) => {
         rows='5'
         placeholder='Add a comment...'
         ref={props.compRef}
+        autoFocus
       ></textarea>
       <Button>Send</Button>
     </form>

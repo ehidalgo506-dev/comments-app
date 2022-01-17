@@ -1,5 +1,6 @@
+@import '../../sassStyles/variables';
 .replies {
   border: none;
-  border-left: 1px solid red;
+  border-left: 2px solid rgba($color: $dark-grey-100, $alpha: 0.2);
   padding-left: 2rem;
 }

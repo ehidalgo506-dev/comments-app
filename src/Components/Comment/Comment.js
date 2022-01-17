@@ -16,15 +16,34 @@ const Comment = (props) => {
   const [newInput, setNewInput] = useState(false);
   const replyComment = useRef();
 
-  const findCommentPerId = () => comments.find((comment) => comment.id === id);
+  const findCommentPerId = () => {
+    if (props.isReply) {
+      const replyByComment = comments.find((comment) =>
+        comment.replies.find((reply) => reply.id === props.replyId)
+      );
+      console.log(
+        '🚀 ~ file: Comment.js ~ line 24 ~ findCommentPerId ~ replyByComment',
+        replyByComment
+      );
+
+      return replyByComment;
+    } else {
+      return comments.find((comment) => comment.id === id);
+    }
+  };
 
   const onReplySubmitHandler = (e) => {
     e.preventDefault();
+
     findCommentPerId().replies.push(
       generateCommentTemplate(
         replyComment.current.value,
         mainData.currentUser.currentUser
       )
+    );
+    console.log(
+      '🚀 ~ file: Comment.js ~ line 39 ~ onReplySubmitHandler ~ findCommentPerId',
+      findCommentPerId()
     );
 
     setMainData((prevState) => ({ ...prevState }));
