@@ -27,6 +27,36 @@ const Main = (props) => {
       ...prevState,
     }));
   };
+
+  const RenderRepliesRecursive = (comments) => {
+    console.log(mainData);
+    const { data } = comments;
+
+    if (data.length === 0) {
+      return null;
+    }
+
+    return data.map((reply) => {
+      return (
+        <Fragment key={reply.id}>
+          <RepliesContainer key={reply.id}>
+            <Card>
+              <Comment
+                replyId={reply.id}
+                content={reply.content}
+                createdAt={reply.createdAt}
+                madeBy={reply.user.username}
+                score={reply.score}
+                isReply={true}
+              />
+            </Card>
+          </RepliesContainer>
+          <RenderRepliesRecursive data={reply.replies} />
+        </Fragment>
+      );
+    });
+  };
+
   return (
     <main className={styles.main}>
       {comments.map((comment) => {
@@ -41,23 +71,9 @@ const Main = (props) => {
                 score={comment.score}
               />
             </Card>
-            {comment.replies.length !== 0 &&
-              comment.replies.map((reply) => {
-                return (
-                  <RepliesContainer key={Math.random()}>
-                    <Card>
-                      <Comment
-                        replyId={reply.id}
-                        content={reply.content}
-                        createdAt={reply.createdAt}
-                        madeBy={reply.user.username}
-                        score={reply.score}
-                        isReply={true}
-                      />
-                    </Card>
-                  </RepliesContainer>
-                );
-              })}
+            {comment.replies.length !== 0 && (
+              <RenderRepliesRecursive data={comment.replies} />
+            )}
           </Fragment>
         );
       })}
