@@ -29,7 +29,6 @@ const Main = (props) => {
   };
 
   const RenderRepliesRecursive = (comments) => {
-    console.log(mainData);
     const { data } = comments;
 
     if (data.length === 0) {
@@ -42,6 +41,7 @@ const Main = (props) => {
           <RepliesContainer key={reply.id}>
             <Card>
               <Comment
+                comment={reply}
                 replyId={reply.id}
                 content={reply.content}
                 createdAt={reply.createdAt}
@@ -50,8 +50,8 @@ const Main = (props) => {
                 isReply={true}
               />
             </Card>
+            <RenderRepliesRecursive data={reply.replies} />
           </RepliesContainer>
-          <RenderRepliesRecursive data={reply.replies} />
         </Fragment>
       );
     });
@@ -64,6 +64,7 @@ const Main = (props) => {
           <Fragment key={comment.id}>
             <Card key={comment.id}>
               <Comment
+                comment={comment}
                 id={comment.id}
                 content={comment.content}
                 createdAt={comment.createdAt}

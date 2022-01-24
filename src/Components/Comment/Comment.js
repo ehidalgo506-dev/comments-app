@@ -8,42 +8,31 @@ import InputComment from './InputComment';
 import generateCommentTemplate from '../../generateCommentTemplate';
 
 const Comment = (props) => {
+  //Context info
   const data = useContext(GlobalState);
   const [mainData, setMainData] = data;
   const { comments } = mainData;
-  const { id, madeBy, content, createdAt, score } = props;
+  // Props info
+  const { isReply, id, madeBy, content, createdAt, score, replyId, comment } =
+    props;
+  //State info
   const [addInputComment, setAddInputComment] = useState([]);
   const [newInput, setNewInput] = useState(false);
   const replyComment = useRef();
 
-  const findCommentPerId = () => {
-    if (props.isReply) {
-      const replyByComment = comments.find((comment) =>
-        comment.replies.find((reply) => reply.id === props.replyId)
-      );
-      console.log(
-        '🚀 ~ file: Comment.js ~ line 24 ~ findCommentPerId ~ replyByComment',
-        replyByComment
-      );
+  const findCommentPerId = () => comment;
 
-      return replyByComment;
-    } else {
-      return comments.find((comment) => comment.id === id);
-    }
-  };
-
+  //Add the new comment/reply to the parent comment
   const onReplySubmitHandler = (e) => {
     e.preventDefault();
+
+    console.log(comments);
 
     findCommentPerId().replies.push(
       generateCommentTemplate(
         replyComment.current.value,
         mainData.currentUser.currentUser
       )
-    );
-    console.log(
-      '🚀 ~ file: Comment.js ~ line 39 ~ onReplySubmitHandler ~ findCommentPerId',
-      findCommentPerId()
     );
 
     setMainData((prevState) => ({ ...prevState }));
