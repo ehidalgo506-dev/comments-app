@@ -10,7 +10,7 @@ function App() {
   const [isLogged, setIsLogged] = useState(false);
   const [updateData, setUpdateData] = useState(data);
 
-  const getUserSubmited = (user) => setIsLogged(user);
+  const getUserSubmitted = (user) => setIsLogged(user);
   const logoutHandler = (logout) => setIsLogged(logout);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
   return (
     <dataContext.Provider value={[updateData, setUpdateData]}>
       <Header isLogged={isLogged} onLogout={logoutHandler} />
-      {!isLogged && <LoginForm onGetUserSubmited={getUserSubmited} />}
+      {!isLogged && <LoginForm onGetUserSubmitted={getUserSubmitted} />}
       {isLogged && <Main />}
     </dataContext.Provider>
   );

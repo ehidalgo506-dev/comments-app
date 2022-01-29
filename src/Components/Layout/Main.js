@@ -31,28 +31,16 @@ const Main = (props) => {
   const RenderRepliesRecursive = (comments) => {
     const { data } = comments;
 
-    if (data.length === 0) {
-      return null;
-    }
+    if (data.length === 0) return null;
 
     return data.map((reply) => {
       return (
-        <Fragment key={reply.id}>
-          <RepliesContainer key={reply.id}>
-            <Card>
-              <Comment
-                comment={reply}
-                replyId={reply.id}
-                content={reply.content}
-                createdAt={reply.createdAt}
-                madeBy={reply.user.username}
-                score={reply.score}
-                isReply={true}
-              />
-            </Card>
-            <RenderRepliesRecursive data={reply.replies} />
-          </RepliesContainer>
-        </Fragment>
+        <RepliesContainer key={reply.id}>
+          <Card>
+            <Comment comment={reply} isReply={true} />
+          </Card>
+          <RenderRepliesRecursive data={reply.replies} />
+        </RepliesContainer>
       );
     });
   };
@@ -63,14 +51,7 @@ const Main = (props) => {
         return (
           <Fragment key={comment.id}>
             <Card key={comment.id}>
-              <Comment
-                comment={comment}
-                id={comment.id}
-                content={comment.content}
-                createdAt={comment.createdAt}
-                madeBy={comment.user.username}
-                score={comment.score}
-              />
+              <Comment comment={comment} score={comment.score} />
             </Card>
             {comment.replies.length !== 0 && (
               <RenderRepliesRecursive data={comment.replies} />

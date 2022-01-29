@@ -13,22 +13,31 @@
     width: 3rem;
     margin-top: 1rem;
   }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
 
   button {
     background-color: $dark-blue-100;
     color: white;
     font-size: 1.3rem;
     font-weight: bold;
-    position: absolute;
-    bottom: 1rem;
-    right: 1.5rem;
     padding: 1.2rem 3.2rem;
     text-align: center;
     text-transform: uppercase;
 
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
     &:hover {
       opacity: 0.5;
     }
+  }
+
+  .btn-cancel {
+    background-color: $dark-red-100;
   }
 
   textarea {

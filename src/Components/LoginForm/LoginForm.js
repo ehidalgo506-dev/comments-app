@@ -25,7 +25,7 @@ const LoginForm = (props) => {
     }
 
     if (!duplicateUsername) {
-      props.onGetUserSubmited(true);
+      props.onGetUserSubmitted(true);
       mainData.registeredUsers.push({ username: username, password: password });
     }
   };
@@ -50,7 +50,7 @@ const LoginForm = (props) => {
 
     localStorage.setItem('isLogged', true);
     localStorage.setItem('currentUser', isFound.username);
-    props.onGetUserSubmited(true);
+    props.onGetUserSubmitted(true);
   };
 
   return (

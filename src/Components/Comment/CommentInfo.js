@@ -6,17 +6,19 @@ import testImage from '../../images/avatars/image-amyrobson.png';
 
 const CommentInfo = (props) => {
   //all props are undefined except date
-  const { commentText, madeBy, date } = props;
+  const {
+    comment: { createdAt, content, user },
+  } = props;
 
   return (
     <div className={`${styles.commentInfo} ${props.className}`}>
       <div className={styles.userInfo}>
         <img src={testImage} alt='User profile' className={styles.userAvatar} />
-        <p className={styles.userUsername}>{madeBy}</p>
-        <p className={styles.userDate}>{date}</p>
+        <p className={styles.userUsername}>{user.username}</p>
+        <p className={styles.userDate}>{createdAt}</p>
       </div>
 
-      <p className={styles.commentText}>{commentText}</p>
+      <p className={styles.commentText}>{content}</p>
     </div>
   );
 };

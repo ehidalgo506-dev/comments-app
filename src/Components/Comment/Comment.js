@@ -13,8 +13,7 @@ const Comment = (props) => {
   const [mainData, setMainData] = data;
   const { comments } = mainData;
   // Props info
-  const { isReply, id, madeBy, content, createdAt, score, replyId, comment } =
-    props;
+  const { comment } = props;
   //State info
   const [addInputComment, setAddInputComment] = useState([]);
   const [newInput, setNewInput] = useState(false);
@@ -39,6 +38,8 @@ const Comment = (props) => {
     setNewInput(false);
   };
 
+  const cancelInputRender = (status) => setNewInput(false);
+
   //Renders a new InputComment for a reply
   const replyButtonHandler = function () {
     setNewInput(true);
@@ -47,6 +48,8 @@ const Comment = (props) => {
         key={addInputComment.length}
         onSubmit={onReplySubmitHandler}
         compRef={replyComment}
+        onCancelInputRender={cancelInputRender}
+        isReply={true}
       />,
     ]);
   };
@@ -54,13 +57,8 @@ const Comment = (props) => {
   return (
     <Fragment>
       <section className={styles.comment}>
-        <CommentInfo
-          commentText={content}
-          madeBy={madeBy}
-          date={createdAt}
-          className={styles.info}
-        />
-        <ButtonScore score={score} className={styles.score} />
+        <CommentInfo comment={comment} className={styles.info} />
+        <ButtonScore score={comment.score} className={styles.score} />
         <ReplyButton onClick={replyButtonHandler} />
       </section>
       {newInput && addInputComment}
