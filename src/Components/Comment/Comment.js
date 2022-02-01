@@ -11,7 +11,6 @@ const Comment = (props) => {
   //Context info
   const data = useContext(GlobalState);
   const [mainData, setMainData] = data;
-  const { comments } = mainData;
   // Props info
   const { comment } = props;
   //State info
@@ -19,15 +18,10 @@ const Comment = (props) => {
   const [newInput, setNewInput] = useState(false);
   const replyComment = useRef();
 
-  const findCommentPerId = () => comment;
-
   //Add the new comment/reply to the parent comment
   const onReplySubmitHandler = (e) => {
     e.preventDefault();
-
-    console.log(comments);
-
-    findCommentPerId().replies.push(
+    comment.replies.push(
       generateCommentTemplate(
         replyComment.current.value,
         mainData.currentUser.currentUser
@@ -38,7 +32,15 @@ const Comment = (props) => {
     setNewInput(false);
   };
 
-  const cancelInputRender = (status) => setNewInput(false);
+  //Toggle the delete button to all posts made only by the current user
+  const isCurrentUserSamePostUser = () => {
+    const currentUser = mainData.currentUser.currentUser;
+    const postUser = comment.user.username;
+    if (currentUser === postUser) return true;
+  };
+
+  //Toggle the text area to make another reply
+  const cancelInputRender = (status) => setNewInput(status);
 
   //Renders a new InputComment for a reply
   const replyButtonHandler = function () {
@@ -49,9 +51,12 @@ const Comment = (props) => {
         onSubmit={onReplySubmitHandler}
         compRef={replyComment}
         onCancelInputRender={cancelInputRender}
-        isReply={true}
       />,
     ]);
+  };
+
+  const deleteButtonHandler = function () {
+    console.log(comment);
   };
 
   return (
@@ -59,7 +64,12 @@ const Comment = (props) => {
       <section className={styles.comment}>
         <CommentInfo comment={comment} className={styles.info} />
         <ButtonScore score={comment.score} className={styles.score} />
-        <ReplyButton onClick={replyButtonHandler} />
+        <div className={styles['action--buttons']}>
+          {isCurrentUserSamePostUser() && (
+            <ReplyButton onClick={deleteButtonHandler} type={'delete'} />
+          )}
+          <ReplyButton onClick={replyButtonHandler} type={'reply'} />
+        </div>
       </section>
       {newInput && addInputComment}
     </Fragment>

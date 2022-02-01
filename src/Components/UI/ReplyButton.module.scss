@@ -5,18 +5,10 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  position: absolute;
-  right: 1.5rem;
-  bottom: 4rem;
   font-weight: bolder;
   color: $dark-blue-100;
   font-size: 1.1rem;
   transition: all 0.25s ease-in;
-
-  @include responsiveMin($tablet-land) {
-    top: 2rem;
-    height: 2rem;
-  }
 
   &:hover {
     transition: all 0.25s ease-in;
@@ -26,5 +18,20 @@
   & span {
     font-size: 1.35rem;
     padding-left: 0.3rem;
+  }
+}
+
+.reply {
+  color: $dark-blue-100;
+  &:hover {
+    transition: all 0.2s ease-in;
+    color: rgba($dark-blue-100, $alpha: 0.5);
+  }
+}
+.delete {
+  color: $dark-red-100;
+  &:hover {
+    transition: all 0.2s ease-in;
+    color: rgba($dark-red-100, $alpha: 0.5);
   }
 }

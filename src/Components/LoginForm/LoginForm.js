@@ -1,4 +1,5 @@
 import React, { useContext, useRef } from 'react';
+import { useState } from 'react/cjs/react.development';
 import dataContext from '../../store/GlobalState';
 import Button from '../UI/Button';
 import Card from '../UI/Card';
@@ -6,36 +7,40 @@ import styles from './LoginForm.module.scss';
 
 const LoginForm = (props) => {
   const data = useContext(dataContext);
-  const [mainData] = data;
+  const [mainData, setNewData] = data;
   const { registeredUsers } = mainData;
-  const inputUsername = useRef();
-  const inputPassword = useRef();
+
+  //Inputs states
+  const [inputUsername, setInputUsername] = useState('');
+  const [inputPassword, setInputPassword] = useState('');
+
+  const inputUsernameValueHandler = (e) => {
+    setInputUsername(e.target.value);
+    console.log(inputUsername);
+  };
+  const inputPasswordValueHandler = (e) => setInputPassword(e.target.value);
 
   const registerUserHandler = (e) => {
     e.preventDefault();
-    const username = inputUsername.current.value;
-    const password = +inputPassword.current.value;
 
-    const duplicateUsername = registeredUsers.find(
-      (user) => user.username === username
+    const isDuplicateUsername = registeredUsers.find(
+      (user) => user.username === inputUsername
     );
 
-    if (duplicateUsername) {
+    if (isDuplicateUsername)
       alert('This user already exists, please try another one');
-    }
 
-    if (!duplicateUsername) {
-      props.onGetUserSubmitted(true);
-      mainData.registeredUsers.push({ username: username, password: password });
-    }
+    if (!isDuplicateUsername)
+      mainData.registeredUsers.push({
+        username: inputUsername,
+        password: +inputPassword,
+      });
   };
 
   const checkForExistingUser = () => {
-    const username = inputUsername.current.value;
-    const password = +inputPassword.current.value;
     return (
-      registeredUsers.find((user) => user.username === username) &&
-      registeredUsers.find((user) => user.password === password)
+      registeredUsers.find((user) => user.username === inputUsername) &&
+      registeredUsers.find((user) => user.password === +inputPassword)
     );
   };
 
@@ -47,23 +52,34 @@ const LoginForm = (props) => {
       alert('Username or password incorrect');
       return;
     }
-
+    //Creating Local Storage
     localStorage.setItem('isLogged', true);
-    localStorage.setItem('currentUser', isFound.username);
+    localStorage.setItem('currentUser', inputUsername);
+    mainData.currentUser = { ...isFound };
     props.onGetUserSubmitted(true);
   };
 
   return (
     <Card className={styles.loginCard}>
-      <h2 className={styles['form-header']}>Hellow! Please LogIn </h2>
+      <h2 className={styles['form-header']}>Hellow! Please Log in </h2>
       <form className={styles.form}>
         <div className={styles.formControl}>
           <label htmlFor='inputUsername'>Username:</label>
-          <input type='text' id='inputUsername' ref={inputUsername} />
+          <input
+            type='text'
+            id='inputUsername'
+            value={inputUsername}
+            onChange={(e) => inputUsernameValueHandler(e)}
+          />
         </div>
         <div className={styles.formControl}>
           <label htmlFor='inputPassword'>Password:</label>
-          <input type='password' id='inputPassword' ref={inputPassword} />
+          <input
+            type='password'
+            id='inputPassword'
+            value={inputPassword}
+            onChange={(e) => inputPasswordValueHandler(e)}
+          />
         </div>
         <div className={styles.formButtons}>
           <Button

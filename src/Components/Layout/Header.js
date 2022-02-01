@@ -8,14 +8,18 @@ import GlobalState from '../../store/GlobalState';
 
 const Header = (props) => {
   const signOutIcon = <FontAwesomeIcon icon={faSignOutAlt} />;
-  const getCurrentUserLocalStorage = localStorage.getItem('currentUser');
+  // const getCurrentUserLocalStorage = localStorage.getItem('currentUser');
   const [mainData] = useContext(GlobalState);
 
   const logoutUser = () => {
     localStorage.removeItem('isLogged');
     localStorage.removeItem('currentUser');
     props.onLogout(false);
-    mainData.currentUser = {};
+    mainData.currentUser.username = {};
+    console.log(
+      '🚀 ~ file: Header.js ~ line 19 ~ logoutUser ~ mainData',
+      mainData.currentUser.username
+    );
   };
 
   return (
@@ -24,7 +28,7 @@ const Header = (props) => {
       <div>
         <p>
           {props.isLogged
-            ? `Hello! ${getCurrentUserLocalStorage}`
+            ? `Hello! ${mainData.currentUser.username}`
             : 'Please Log In'}
         </p>
         {props.isLogged && (
