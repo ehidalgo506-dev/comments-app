@@ -16,10 +16,6 @@ const Header = (props) => {
     localStorage.removeItem('currentUser');
     props.onLogout(false);
     mainData.currentUser.username = {};
-    console.log(
-      '🚀 ~ file: Header.js ~ line 19 ~ logoutUser ~ mainData',
-      mainData.currentUser.username
-    );
   };
 
   return (
@@ -28,7 +24,7 @@ const Header = (props) => {
       <div>
         <p>
           {props.isLogged
-            ? `Hello! ${mainData.currentUser.username}`
+            ? `Hello! ${mainData.currentUser.currentUser}`
             : 'Please Log In'}
         </p>
         {props.isLogged && (

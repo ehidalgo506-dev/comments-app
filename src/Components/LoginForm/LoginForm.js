@@ -16,7 +16,6 @@ const LoginForm = (props) => {
 
   const inputUsernameValueHandler = (e) => {
     setInputUsername(e.target.value);
-    console.log(inputUsername);
   };
   const inputPasswordValueHandler = (e) => setInputPassword(e.target.value);
 
@@ -33,14 +32,14 @@ const LoginForm = (props) => {
     if (!isDuplicateUsername)
       mainData.registeredUsers.push({
         username: inputUsername,
-        password: +inputPassword,
+        password: inputPassword,
       });
   };
 
   const checkForExistingUser = () => {
-    return (
-      registeredUsers.find((user) => user.username === inputUsername) &&
-      registeredUsers.find((user) => user.password === +inputPassword)
+    return registeredUsers.find(
+      (user) =>
+        user.username === inputUsername && user.password === inputPassword
     );
   };
 
@@ -55,6 +54,7 @@ const LoginForm = (props) => {
     //Creating Local Storage
     localStorage.setItem('isLogged', true);
     localStorage.setItem('currentUser', inputUsername);
+    console.log(mainData);
     mainData.currentUser = { ...isFound };
     props.onGetUserSubmitted(true);
   };

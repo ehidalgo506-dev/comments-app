@@ -1,5 +1,5 @@
 {
-  "registeredUsers": [{ "username": "amyrobson", "password": 12345 }],
+  "registeredUsers": [{ "username": "amyrobson", "password": "12345" }],
   "currentUser": {},
   "comments": [
     {
