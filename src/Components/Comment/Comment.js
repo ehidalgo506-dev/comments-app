@@ -12,7 +12,7 @@ const Comment = (props) => {
   const data = useContext(GlobalState);
   const [mainData, setMainData] = data;
   // Props info
-  const { comment } = props;
+  let { comment } = props;
   //State info
   const [addInputComment, setAddInputComment] = useState([]);
   const [newInput, setNewInput] = useState(false);
@@ -28,6 +28,7 @@ const Comment = (props) => {
       )
     );
 
+    isCurrentUserSamePostUser();
     setMainData((prevState) => ({ ...prevState }));
     setNewInput(false);
   };
@@ -55,24 +56,34 @@ const Comment = (props) => {
     ]);
   };
 
-  const deleteButtonHandler = function () {
-    console.log(comment);
+  const deleteButtonHandler = function (data, id) {
+    for (let i in data) {
+      if (data[i].id !== id && data[i].replies)
+        deleteButtonHandler(data[i].replies, id);
+      else delete data[i];
+    }
+
+    setMainData((prevState) => ({ ...prevState }));
+    console.log(mainData.comments);
   };
 
   return (
-    <Fragment>
+    <>
       <section className={styles.comment}>
         <CommentInfo comment={comment} className={styles.info} />
         <ButtonScore score={comment.score} className={styles.score} />
         <div className={styles['action--buttons']}>
           {isCurrentUserSamePostUser() && (
-            <ReplyButton onClick={deleteButtonHandler} type={'delete'} />
+            <ReplyButton
+              onClick={() => deleteButtonHandler(mainData.comments, comment.id)}
+              type={'delete'}
+            />
           )}
           <ReplyButton onClick={replyButtonHandler} type={'reply'} />
         </div>
       </section>
       {newInput && addInputComment}
-    </Fragment>
+    </>
   );
 };
 
