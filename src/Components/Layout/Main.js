@@ -4,6 +4,7 @@ import GlobalState from '../../store/GlobalState';
 import Comment from '../Comment/Comment';
 import InputComment from '../Comment/InputComment';
 import RepliesContainer from '../Comment/RepliesContainer';
+import ModalWindow from '../ModalWindow/ModalWindow';
 import Card from '../UI/Card';
 import styles from './Main.module.scss';
 
@@ -47,6 +48,7 @@ const Main = (props) => {
 
   return (
     <main className={styles.main}>
+      <ModalWindow message='Are you sure you want to delete the message?' />
       {comments.map((comment) => {
         return (
           <Fragment key={comment.id}>

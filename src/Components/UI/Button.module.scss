@@ -10,6 +10,16 @@
   box-shadow: 0 0 10px rgba($color: #000000, $alpha: 0.1);
   transform: translateY(0);
   transition: all 0.25s ease-out;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: $white;
+
+  &.delete {
+    background-color: $dark-red-100;
+  }
+  &.cancel {
+    background-color: $dark-grey-100;
+  }
 
   @include responsiveMin($tablet) {
     padding: 1rem 3rem;
