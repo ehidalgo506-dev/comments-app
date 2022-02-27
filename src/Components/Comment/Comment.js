@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useRef, useState } from 'react';
 import GlobalState from '../../store/GlobalState';
 import ButtonScore from '../UI/ButtonScore';
-import ReplyButton from '../UI/ReplyButton';
+import ActionButton from '../UI/ActionButton';
 import styles from './Comment.module.scss';
 import CommentInfo from './CommentInfo';
 import InputComment from './InputComment';
@@ -74,12 +74,12 @@ const Comment = (props) => {
         <ButtonScore score={comment.score} className={styles.score} />
         <div className={styles['action--buttons']}>
           {isCurrentUserSamePostUser() && (
-            <ReplyButton
+            <ActionButton
               onClick={() => deleteButtonHandler(mainData.comments, comment.id)}
               type={'delete'}
             />
           )}
-          <ReplyButton onClick={replyButtonHandler} type={'reply'} />
+          <ActionButton onClick={replyButtonHandler} type={'reply'} />
         </div>
       </section>
       {newInput && addInputComment}
