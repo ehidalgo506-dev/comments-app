@@ -48,7 +48,6 @@ const Main = (props) => {
 
   return (
     <main className={styles.main}>
-      <ModalWindow message='Are you sure you want to delete the message?' />
       {comments.map((comment) => {
         return (
           <Fragment key={comment.id}>

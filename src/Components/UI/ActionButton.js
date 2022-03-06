@@ -10,7 +10,7 @@ const ActionButton = (props) => {
   const type = props.type.replace(props.type[0], props.type[0].toUpperCase());
   return (
     <button
-      className={`${styles.ActionButton} ${styles[props.type]}`}
+      className={`${styles.actionButton} ${styles[props.type]}`}
       onClick={props.onClick}
     >
       {props.type === 'reply' ? replyIcon : trashIcon}

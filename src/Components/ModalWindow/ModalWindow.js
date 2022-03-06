@@ -2,6 +2,7 @@ import React from 'react';
 import reactDom from 'react-dom';
 import './ModalWindow.scss';
 import Button from '../UI/Button';
+import { useEffect } from 'react/cjs/react.production.min';
 
 const Backdrop = (props) => {
   return (
@@ -17,8 +18,12 @@ const MessageWindow = (props) => {
       <h2>Are you sure you want to continue?</h2>
       <p>{props.windowMessage}</p>
       <div className='btnsContainer'>
-        <Button type='cancel'>No, Cancel</Button>
-        <Button type='delete'>Yes, Continue</Button>
+        <Button type='cancel' onClick={props.closeModal}>
+          No, Cancel
+        </Button>
+        <Button type='delete' onClick={props.onContinue}>
+          Yes, Continue
+        </Button>
       </div>
     </div>
   );
@@ -34,7 +39,11 @@ const ModalWindow = (props) => {
         backdropEl
       )}
       {reactDom.createPortal(
-        <MessageWindow windowMessage={props.message} />,
+        <MessageWindow
+          windowMessage={props.message}
+          closeModal={props.closeModal}
+          onContinue={props.onContinue}
+        />,
         windowEl
       )}
     </>

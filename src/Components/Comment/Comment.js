@@ -6,6 +6,7 @@ import styles from './Comment.module.scss';
 import CommentInfo from './CommentInfo';
 import InputComment from './InputComment';
 import generateCommentTemplate from '../../generateCommentTemplate';
+import ModalWindow from '../ModalWindow/ModalWindow';
 
 const Comment = (props) => {
   //Context info
@@ -16,6 +17,7 @@ const Comment = (props) => {
   //State info
   const [addInputComment, setAddInputComment] = useState([]);
   const [newInput, setNewInput] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
   const replyComment = useRef();
 
   //Add the new comment/reply to the parent comment
@@ -56,10 +58,12 @@ const Comment = (props) => {
     ]);
   };
 
-  const deleteButtonHandler = function (data, id) {
+  const closeModalHandler = () => setActiveModal(false);
+
+  const deleteComment = function (data, id) {
     for (let i in data) {
       if (data[i].id !== id && data[i].replies)
-        deleteButtonHandler(data[i].replies, id);
+        deleteComment(data[i].replies, id);
       else delete data[i];
     }
 
@@ -67,17 +71,26 @@ const Comment = (props) => {
     console.log(mainData.comments);
   };
 
+  const deleteButtonHandler = () => {
+    setActiveModal(true);
+    // deleteComment(mainData.comments, comment.id);
+  };
+
   return (
     <>
+      {activeModal && (
+        <ModalWindow
+          message='Are you sure you want to delete the message?'
+          closeModal={closeModalHandler}
+          onContinue={() => deleteComment(mainData.comments, comment.id)}
+        />
+      )}
       <section className={styles.comment}>
         <CommentInfo comment={comment} className={styles.info} />
         <ButtonScore score={comment.score} className={styles.score} />
         <div className={styles['action--buttons']}>
           {isCurrentUserSamePostUser() && (
-            <ActionButton
-              onClick={() => deleteButtonHandler(mainData.comments, comment.id)}
-              type={'delete'}
-            />
+            <ActionButton onClick={deleteButtonHandler} type={'delete'} />
           )}
           <ActionButton onClick={replyButtonHandler} type={'reply'} />
         </div>
